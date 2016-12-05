@@ -3,13 +3,15 @@ import {getDisplayName} from './getDisplayName'
 import {normalizeOptions} from './normalizeOptions'
 import {shouldInclude} from './shouldInclude'
 
+let isEnabled = false;
+
 function diffProps (prev, next, displayName) {
   return deepDiff(prev, next, `${displayName}.props`, [])
 }
 
 function diffState (prev, next , displayName) {
   if (prev && next) {
-    return deepDiff(pre, next, `${displayName}.state`, [])
+    return deepDiff(prev, next, `${displayName}.state`, [])
   }
 
   return []
@@ -17,6 +19,10 @@ function diffState (prev, next , displayName) {
 
 function createComponentDidUpdate (opts) {
   return function componentDidUpdate (prevProps, prevState) {
+    if (!isEnabled) {
+      return
+    }
+
     const displayName = getDisplayName(this)
 
     if (!shouldInclude(displayName, opts)) {
@@ -29,6 +35,10 @@ function createComponentDidUpdate (opts) {
 
     diffs.forEach(opts.notifier)
   }
+}
+
+export const toggle = () => {
+  isEnabled = !isEnabled
 }
 
 export const whyDidYouUpdate = (React, opts = {}) => {
