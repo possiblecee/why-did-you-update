@@ -1,36 +1,22 @@
 {
   "name": "why-did-you-update",
   "version": "0.0.9",
-  "description": "Patch React to discover unnecessary re-renders",
+  "description": "[![Travis][build-badge]][build] [![npm version](https://badge.fury.io/js/why-did-you-update.svg)](https://badge.fury.io/js/why-did-you-update)",
   "main": "src/index.js",
-  "files": [
-    "es6",
-    "lib",
-    "umd"
-  ],
+  "directories": {
+    "test": "tests"
+  },
   "scripts": {
-    "build": "nwb build",
-    "clean": "nwb clean",
-    "start": "nwb serve",
-    "test": "nwb test",
-    "test:watch": "nwb test --server",
-    "release:patch": "nwb build && npm version patch && npm publish"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "lodash": "^4.13.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/possiblecee/why-did-you-update.git"
   },
-  "peerDependencies": {
-    "react": "^15.0 || 0.14.x"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/possiblecee/why-did-you-update/issues"
   },
-  "devDependencies": {
-    "lodash-webpack-plugin": "^0.8.1",
-    "nwb": "0.9.x",
-    "react": "0.14.x",
-    "react-dom": "0.14.x"
-  },
-  "author": "Gabe Scholz",
-  "license": "MIT",
-  "keywords": [
-    "react-component"
-  ]
+  "homepage": "https://github.com/possiblecee/why-did-you-update#readme"
 }
