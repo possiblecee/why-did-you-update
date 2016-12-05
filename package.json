@@ -1,7 +1,7 @@
 {
   "name": "why-did-you-update",
   "version": "0.0.9",
-  "description": "[![Travis][build-badge]][build] [![npm version](https://badge.fury.io/js/why-did-you-update.svg)](https://badge.fury.io/js/why-did-you-update)",
+  "description": "Patch React to discover unnecessary re-renders",
   "main": "src/index.js",
   "directories": {
     "test": "tests"
@@ -13,8 +13,14 @@
     "type": "git",
     "url": "git+https://github.com/possiblecee/why-did-you-update.git"
   },
-  "author": "",
-  "license": "ISC",
+  "peerDependencies": {
+    "react": "^15.0 || 0.14.x"
+  },
+  "dependencies": {
+    "lodash": "^4.13.1"
+  },
+  "author": "Gabe Scholz",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/possiblecee/why-did-you-update/issues"
   },
