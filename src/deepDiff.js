@@ -5,8 +5,10 @@ import _keys from 'lodash/keys'
 import _union from 'lodash/union'
 
 const isReferenceEntity = o => Array.isArray(o) || _isObject(o)
+const maxDepth = 10;
 
-export const deepDiff = (prev, next, name, notes) => {
+export const deepDiff = (prev, next, name, notes, level = 0) => {
+  level++;
   const isRefEntity = isReferenceEntity(prev) && isReferenceEntity(next)
 
   if (!_isEqual(prev, next)) {
@@ -17,16 +19,16 @@ export const deepDiff = (prev, next, name, notes) => {
         const type = `function`
         return notes.concat({name, prev, next, type})
       }
-    } else if (isRefEntity) {
+    } else if (isRefEntity && level <= maxDepth) {
       const keys = _union(_keys(prev), _keys(next))
-      return keys.reduce((acc, key) => deepDiff(prev[key], next[key], `${name}.${key}`, acc), notes)
+      return keys.reduce((acc, key) => deepDiff(prev[key], next[key], `${name}.${key}`, acc, level), notes)
     }
   } else if (prev !== next) {
     const type = `avoidable`
 
-    if (isRefEntity) {
+    if (isRefEntity && level <= maxDepth) {
       const keys = _union(_keys(prev), _keys(next))
-      return keys.reduce((acc, key) => deepDiff(prev[key], next[key], `${name}.${key}`, acc), notes.concat({name, prev, next, type}))
+      return keys.reduce((acc, key) => deepDiff(prev[key], next[key], `${name}.${key}`, acc, level), notes.concat({name, prev, next, type}))
     } else {
       return notes.concat({name, prev, next, type})
     }
@@ -34,4 +36,3 @@ export const deepDiff = (prev, next, name, notes) => {
 
   return notes
 }
-
